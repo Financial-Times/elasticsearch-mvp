@@ -1,14 +1,14 @@
-FROM alpine:3.3
+FROM alpine:3.4
 
 ADD *.go /elasticsearch-mvp/
 
 RUN apk add --update bash \
-  && apk --update add git bzr \
-  && apk --update add go \
+  && apk --update add git bzr go ca-certificates \
   && export GOPATH=/gopath \
   && REPO_PATH="github.com/Financial-Times/elasticsearch-mvp" \
   && mkdir -p $GOPATH/src/${REPO_PATH} \
   && mv elasticsearch-mvp/* $GOPATH/src/${REPO_PATH} \
+  && rm -r elasticsearch-mvp \
   && cd $GOPATH/src/${REPO_PATH} \
   && go get -t ./... \
   && go build \

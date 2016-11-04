@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	app := cli.App("concept-publisher", "Retrieves concepts and puts them on a queue")
+	app := cli.App("elasticsearch-health", "Monitors the health of an AWS elasticsearch cluster")
 	port := app.String(cli.StringOpt{
 		Name:   "port",
 		Value:  "8080",
@@ -61,7 +61,7 @@ func main() {
 		http.Handle("/", monitoringRouter)
 
 		if err := http.ListenAndServe(":"+*port, nil); err != nil {
-			log.Fatalf("Unable to start server: %v", err)
+			log.Fatalf("Unable to start: %v", err)
 		}
 	}
 
