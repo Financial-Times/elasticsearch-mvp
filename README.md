@@ -9,9 +9,8 @@ The taken approach to access ES:
 - Create an HTTP client wrapping all the request with Amazon signer (github.com/sha1sum/aws_signing_client)
 - Use https://github.com/olivere/elastic library to any ES request, after passing on the above created client
 
-## How to deploy
+## How to run
 
-Run:
 ```
 go get -u github.com/Financial-Times/elasticsearch-mvp
 go build
@@ -21,10 +20,10 @@ Please provide the elasticsearch endpoint, region and the host you want to run t
 
 ## Available endpoints:
 
-localhost:8080/__health
+### localhost:8080/__health
 
 Provides the standard FT output indicating the clusters health.
 
-localhost:8080/__health-details
+### localhost:8080/__health-details
 
 Provides a detailed health status from ES cluster. It matches the response from [elasticsearch-endpoint/_cluster/health](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html)
