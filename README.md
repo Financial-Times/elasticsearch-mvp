@@ -12,17 +12,19 @@ The taken approach to access ES:
 ## How to deploy
 
 Run:
-
+```
 go get -u github.com/Financial-Times/elasticsearch-mvp
 go build
 ./elasticsearch-mvp --aws-access-key={access key} --aws-secret-access-key={secret key}
-
+```
 Please provide the elasticsearch endpoint, region and the host you want to run the app on.
 
 ## Available endpoints:
 
 localhost:8080/__health
+
 Provides the standard FT output indicating the clusters health.
 
 localhost:8080/__health-details
+
 Provides a detailed health status from ES cluster. It matches the response from [elasticsearch-endpoint/_cluster/health](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html)
