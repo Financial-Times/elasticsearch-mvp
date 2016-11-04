@@ -22,13 +22,11 @@ func main() {
 	})
 	accessKey := app.String(cli.StringOpt{
 		Name:   "aws-access-key",
-		Value:  "",
 		Desc:   "AWS ACCES KEY",
 		EnvVar: "AWS_ACCESS_KEY_ID",
 	})
 	secretKey := app.String(cli.StringOpt{
 		Name:   "aws-secret-access-key",
-		Value:  "",
 		Desc:   "AWS SECRET ACCES KEY",
 		EnvVar: "AWS_SECRET_ACCESS_KEY",
 	})
