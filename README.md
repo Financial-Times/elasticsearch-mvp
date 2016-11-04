@@ -1,13 +1,13 @@
 # POC for using ElasticSearch 
 
-Small application, which checks the health of an AES cluster.
+Small application which checks the health of an AES cluster.
 
 :warning: The AWS SDK for Go [does not currently include support for ES data plane api](https://github.com/aws/aws-sdk-go/issues/710), but the Signer is exposed since v1.2.0.
 
 The taken approach to access ES:
 - Use the v4.Signer provided by the amazon-go-sdk
-- Create an HTTP client [wrapping](github.com/sha1sum/aws_signing_client) all the request with Amazon signer
-- Use https://github.com/olivere/elastic library to any ES request, after passing on the above created client
+- Create an HTTP client [wrapping](https://github.com/sha1sum/aws_signing_client) all the requests with Amazon signer
+- Use https://github.com/olivere/elastic library to any ES request, after passing in the above created client
 
 ## How to run
 
