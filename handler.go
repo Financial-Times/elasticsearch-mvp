@@ -13,7 +13,7 @@ func clusterIsHealthyCheck() v1a.Check {
 		Name:             "Check Elasticsearch cluster health",
 		PanicGuide:       "todo",
 		Severity:         1,
-		TechnicalSummary: "Elasticsearch cluster is not healthy. Details on /__health-details",
+		TechnicalSummary: "Elasticsearch cluster is not healthy. Details on __elasticsearch-mvp/__health-details",
 		Checker:          healthChecker,
 	}
 }

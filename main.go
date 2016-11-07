@@ -48,6 +48,7 @@ func main() {
 		elasticClient, err = newElasticClient(credentials.NewStaticCredentials(*accessKey, *secretKey, ""), esEndpoint, esRegion)
 		if err != nil {
 			log.Errorf("Could not connect to elasticsearch, error=[%s]\n", err)
+			return
 		}
 
 		servicesRouter := mux.NewRouter()
