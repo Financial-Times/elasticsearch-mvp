@@ -22,7 +22,7 @@ It is also possible to provide the elasticsearch endpoint, region and the port y
 
 ### localhost:8080/__health
 
-Provides the standard FT output indicating the clusters health.
+Provides the standard FT output indicating the connectivity and the cluster's health.
 
 ### localhost:8080/__health-details
 

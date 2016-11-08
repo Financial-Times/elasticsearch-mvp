@@ -11,7 +11,6 @@ var elasticClient *elastic.Client
 
 func newElasticClient(creds *credentials.Credentials, endpoint *string, region *string) (*elastic.Client, error) {
 	signer := v4.NewSigner(creds)
-	// creates a default HTTPClient for es amazon
 	awsClient, err := aws_signing_client.New(signer, nil, "es", *region)
 	if err != nil {
 		return nil, err

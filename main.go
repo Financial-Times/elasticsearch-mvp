@@ -1,6 +1,9 @@
 package main
 
 import (
+	"net/http"
+	"os"
+
 	"github.com/Financial-Times/go-fthealth/v1a"
 	"github.com/Financial-Times/http-handlers-go/httphandlers"
 	log "github.com/Sirupsen/logrus"
@@ -8,8 +11,6 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/jawher/mow.cli"
 	"github.com/rcrowley/go-metrics"
-	"net/http"
-	"os"
 )
 
 func main() {
@@ -48,7 +49,6 @@ func main() {
 		elasticClient, err = newElasticClient(credentials.NewStaticCredentials(*accessKey, *secretKey, ""), esEndpoint, esRegion)
 		if err != nil {
 			log.Errorf("Could not connect to elasticsearch, error=[%s]\n", err)
-			return
 		}
 
 		servicesRouter := mux.NewRouter()
@@ -56,7 +56,7 @@ func main() {
 		monitoringRouter = httphandlers.TransactionAwareRequestLoggingHandler(log.StandardLogger(), monitoringRouter)
 		monitoringRouter = httphandlers.HTTPMetricsHandler(metrics.DefaultRegistry, monitoringRouter)
 
-		http.HandleFunc("/__health", v1a.Handler("Amazon Elasticsearch Service Healthcheck", "Checks for AES", clusterIsHealthyCheck()))
+		http.HandleFunc("/__health", v1a.Handler("Amazon Elasticsearch Service Healthcheck", "Checks for AES", connectivityHealthyCheck(), clusterIsHealthyCheck()))
 		http.HandleFunc("/__health-details", HealthDetails)
 		http.HandleFunc("/__gtg", GoodToGo)
 		http.Handle("/", monitoringRouter)
@@ -67,5 +67,9 @@ func main() {
 	}
 
 	log.SetLevel(log.InfoLevel)
-	app.Run(os.Args)
+	err := app.Run(os.Args)
+	if err != nil {
+		log.Errorf("App could not start, error=[%s]\n", err)
+		return
+	}
 }
